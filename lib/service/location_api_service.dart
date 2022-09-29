@@ -3,15 +3,6 @@ import 'package:http/http.dart' as http;
 import '../model/location.dart';
 
 class LocationApiService {
-  String _city='';
-
-  void setCityName(String name){
-    _city= name;
-    print('_---------$_city');
-  }
-
-
-
 
   Future<CityLocation> getLocation(String city) async {
     late CityLocation cityLocation;

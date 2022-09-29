@@ -20,7 +20,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
   @override
   void initState() {
-    // BlocProvider.of<WeatherBloc>(context).add(GetWeatherEvent());
     super.initState();
   }
 
@@ -30,7 +29,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
       appBar: AppBar(
         title: const Text('Weather'),
       ),
-      body: BlocBuilder<WeatherBloc, WeatherState>(
+      body: BlocBuilder<WeatherCubit, WeatherState>(
           builder: (context, state) {
             if (state is LoadingState) {
               return const Center(child: CircularProgressIndicator());

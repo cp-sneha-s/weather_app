@@ -32,19 +32,18 @@ class WeatherCubit extends Cubit<WeatherState>{
       InitialState());
 
 
-  void getCurrentWeather()async{
+
+
+  void getCurrentWeather(String city)async{
     try{
       emit(LoadingState());
-    //  final weatherData= await weatherRepository.getWeatherFromRepo();
-    //  emit(LoadedState(weatherData));
+      final location=await  weatherRepository.getLocationFromRepo(city);
+     final weatherData= await weatherRepository.getWeatherFromRepo(location);
+     emit(LoadedState(weatherData));
     }catch(error){
       emit(ErrorState());
     }
 
-  }
-  void setCityName(String name){
-    cityName= name;
-    print('cityNAme: $cityName');
   }
 
 }

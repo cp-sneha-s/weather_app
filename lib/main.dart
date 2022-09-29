@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return  BlocProvider<WeatherBloc>(
-      create: (context)=>WeatherBloc(WeatherRepository()),
+    return  BlocProvider<WeatherCubit>(
+      create: (context)=>WeatherCubit(WeatherRepository()),
       child: const MaterialApp(
         title: 'Weather app',
         home:   HomeScreen()),

@@ -64,7 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   if (formKey.currentState!.validate()) {
-                   context.read<WeatherBloc>().add(LocationSearchEvent(textEditingController.text));
+                   // context.read<WeatherBloc>().add(LocationSearchEvent(textEditingController.text));
+                    context.read<WeatherCubit>().getCurrentWeather(textEditingController.text);
+
                     Navigator.push(
                         context,
                         MaterialPageRoute(
