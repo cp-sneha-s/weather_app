@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/screens/weather_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -62,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   if (formKey.currentState!.validate()) {
-                    context.read<WeatherBloc>().add(SearchEvent(textEditingController.text));
                     Navigator.push(
                         context,
                         MaterialPageRoute(
