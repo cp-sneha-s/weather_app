@@ -7,7 +7,7 @@ class WeatherRepository{
   WeatherApiService weatherApiService= WeatherApiService();
   LocationApiService locationApiService= LocationApiService();
 
-  Future<WeatherData> getWeatherFromRepo(  CityLocation currentLocation)async{
+  Future<WeatherData> getWeatherFromRepo(CityLocation currentLocation)async{
   return  await weatherApiService.getWeatherData(currentLocation);
   }
 

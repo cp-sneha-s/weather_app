@@ -1,13 +1,19 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather_app/service/weather_api_service.dart';
 import '../model/location.dart';
 
 class LocationApiService {
 
   Future<CityLocation> getLocation(String city) async {
+    SharedPreferences pref= await SharedPreferences.getInstance();
+    pref.setString('weatherMap', k);
+    String apiKey=pref.getString('weatherMap')??"";
+
     late CityLocation cityLocation;
     String locationApi =
-        'http://api.openweathermap.org/geo/1.0/direct?q=$city&limit=1&appid=e5cafaa9bc8057cb91ca247efd8e0323';
+        'http://api.openweathermap.org/geo/1.0/direct?q=$city&limit=1&appid=$apiKey';
     try {
       http.Response response = await http.get(Uri.parse(locationApi));
       if (response.statusCode == 200) {

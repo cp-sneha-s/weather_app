@@ -1,5 +1,5 @@
 extension WeatherIcon on int{
-String getWeatherIcon(int condition){
+String getWeatherIcon(){
   if (this < 300) {
     return '🌩';
   } else if (this < 400) {
@@ -21,7 +21,7 @@ String getWeatherIcon(int condition){
 }
 
 extension WeatherMessage on int{
-  String getWeatherMessage(int temp){
+  String getWeatherMessage(){
     if (this > 25) {
       return 'It\'s 🍦 time';
     } else if (this > 20) {
