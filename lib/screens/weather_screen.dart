@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/bloc/weather_bloc.dart';
+import 'package:weather_app/core/extension.dart';
+import 'package:weather_app/model/weather.dart';
+
+import '../bloc/weather_cubit.dart';
+
 
 
 class WeatherScreen extends StatefulWidget {
@@ -25,45 +32,62 @@ class _WeatherScreenState extends State<WeatherScreen> {
         appBar: AppBar(
           title: const Text('Weather'),
         ),
-        body: Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Text(
-                      '',
-             //TODO Replace empty text with '$temp',
+        body:BlocBuilder<WeatherBloc,WeatherState>(
+          builder: (BuildContext context, WeatherState state){
+            if(state is InitialState){
+              return Container();
+            }else if(state is LoadingState){
+              return Center(child: CircularProgressIndicator());
+            }else if(state is LoadedState){
+              WeatherData weatherData= state.weatherData;
+              temp= weatherData.temp!.toInt();
+              condition= weatherData.cod;
+              weatherMessage= condition.getWeatherMessage();
+              weatherIcon= temp.getWeatherIcon();
+              return   Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            '$temp',
+                            style: const TextStyle(fontSize: 25),
+                          ),
+                          Text(
+                            weatherIcon,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                    '$weatherMessage in ${weatherData.name}!',
 
-                      style: const TextStyle(fontSize: 25),
-                    ),
-                        Text(
-                          weatherIcon,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      '',
-                      //TODO Replace empty text with '$weatherMessage in ${weatherData.name}!',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                         'Looks like: ${weatherData.description}!',
+                        textAlign: TextAlign.right,
+                        style: const TextStyle(fontSize: 25),
+                      ),
+                    ],
+                  ));
+            }else if(state is ErrorState){
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+              return Container();
+            }
+            return Container();
+          },
 
-                      textAlign: TextAlign.right,
-                      style: TextStyle(fontSize: 25),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  '',
-                  //TODO Replace empty text 'Looks like: ${weatherData.description}!',
-                  textAlign: TextAlign.right,
-                  style: const TextStyle(fontSize: 25),
-                ),
-              ],
-            )));
+        )
+    );
   }
 }

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/bloc/weather_cubit.dart';
+import 'package:weather_app/repo/weather_repo.dart';
 import 'package:weather_app/screens/home_screen.dart';
+
+import 'bloc/weather_bloc.dart';
 
 
 void main() {
@@ -12,7 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Weather app', home: const HomeScreen());
+    return BlocProvider(
+      create: (_)=>WeatherBloc(WeatherRepository()),
+        child: const MaterialApp(title: 'Weather app', home: HomeScreen()));
   }
 }
 

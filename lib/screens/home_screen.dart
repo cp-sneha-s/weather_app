@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/screens/weather_screen.dart';
+
+import '../bloc/weather_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -59,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Center(
               child: ElevatedButton(
                 onPressed: () async {
+                  BlocProvider.of<WeatherBloc>(context).add(SearchEvent(textEditingController.text));
                   if (formKey.currentState!.validate()) {
                     Navigator.push(
                         context,
