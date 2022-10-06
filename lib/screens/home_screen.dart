@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/screens/weather_screen.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -61,15 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   if (formKey.currentState!.validate()) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const WeatherScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>WeatherScreen()));
                     textEditingController.clear();
                   }
                 },
-                style:
-                    ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueGrey),
                 child: const Text('Get weather'),
               ),
             ),

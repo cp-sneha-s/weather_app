@@ -2,7 +2,7 @@ class WeatherData {
   double latitude;
   double longitude;
   String? name;
-  double? temp;
+  double temp;
   double? windSpeed;
   String? description;
   String? country;
@@ -12,7 +12,7 @@ class WeatherData {
       {required this.latitude,
       required this.longitude,
       this.name,
-      this.temp,
+      required this.temp,
       this.windSpeed,
       this.description,
       this.country,
@@ -27,5 +27,5 @@ class WeatherData {
       windSpeed: map['wind']['speed'],
 
       description: map['weather'][0]['description'],
-    cod:map['cod'],);
+    cod:map['weather'][0]['id'],);
 }
